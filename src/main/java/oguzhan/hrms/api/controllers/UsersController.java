@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import oguzhan.hrms.business.abstracts.JobPositionService;
+import oguzhan.hrms.business.abstracts.UserService;
+import oguzhan.hrms.core.entities.concretes.User;
 import oguzhan.hrms.core.utilities.results.DataResult;
 import oguzhan.hrms.core.utilities.results.Result;
-import oguzhan.hrms.entities.concretes.JobPosition;
 
 @RestController
-@RequestMapping("/api/jobpositions")
-public class JobPositionsController {
+@RequestMapping("/api/users")
+public class UsersController {
 	
-	private JobPositionService jobPositionService;
+	private UserService userService;
 
 	@Autowired
-	public JobPositionsController(JobPositionService jobPositionService) {
+	public UsersController(UserService userService) {
 		super();
-		this.jobPositionService = jobPositionService;
+		this.userService = userService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<JobPosition>> getAll(){
-		return this.jobPositionService.getAll();
+	public DataResult<List<User>> getAll(){
+		return this.userService.getAll();
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobPosition jobPosition) {
-		return this.jobPositionService.add(jobPosition);
+	public Result add(@RequestBody User user){
+		return this.userService.add(user);
 	}
 }
