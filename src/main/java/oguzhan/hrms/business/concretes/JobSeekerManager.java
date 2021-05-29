@@ -5,30 +5,37 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import oguzhan.hrms.business.abstracts.EmailVerificationService;
 import oguzhan.hrms.business.abstracts.JobSeekerService;
 import oguzhan.hrms.business.constants.Messages;
 import oguzhan.hrms.core.adapter.abstracts.MernisCheckService;
 import oguzhan.hrms.core.utilities.business.BusinessRules;
+import oguzhan.hrms.core.utilities.helpers.MailVerificationService;
 import oguzhan.hrms.core.utilities.results.DataResult;
 import oguzhan.hrms.core.utilities.results.ErrorResult;
 import oguzhan.hrms.core.utilities.results.Result;
 import oguzhan.hrms.core.utilities.results.SuccessDataResult;
 import oguzhan.hrms.core.utilities.results.SuccessResult;
 import oguzhan.hrms.dataAccess.abstracts.JobSeekerDao;
+import oguzhan.hrms.entities.concretes.EmailVerification;
 import oguzhan.hrms.entities.concretes.JobSeeker;
 
 @Service
 public class JobSeekerManager implements JobSeekerService {
 
 	private JobSeekerDao jobSeekerDao;
-	@Autowired
 	private MernisCheckService mernisCheckService;
+	private EmailVerificationService emailVerificationService;
+	private MailVerificationService mailVerificationService;
 	
 	@Autowired
-	public JobSeekerManager(JobSeekerDao jobSeekerDao, MernisCheckService mernisCheckService) {
+	public JobSeekerManager(JobSeekerDao jobSeekerDao, MernisCheckService mernisCheckService, EmailVerificationService emailVerificationService,
+			MailVerificationService mailVerificationService) {
 		super();
 		this.jobSeekerDao = jobSeekerDao;
 		this.mernisCheckService = mernisCheckService;
+		this.emailVerificationService = emailVerificationService;
+		this.mailVerificationService = mailVerificationService;
 	}
 
 	@Override
@@ -39,13 +46,19 @@ public class JobSeekerManager implements JobSeekerService {
 	@Override
 	public Result add(JobSeeker jobSeeker) {
 		
-		var result = BusinessRules.run(isAllFieldNull(jobSeeker), checkUserMernisSuccess(jobSeeker));
+		var result = BusinessRules.run(isAllFieldNull(jobSeeker), 
+				checkUserMernisSuccess(jobSeeker),
+				isEmailOrIdentityNumberRegistered(jobSeeker));
 		
 		if(result != null) {
 			return result;
 		}
 		
 		this.jobSeekerDao.save(jobSeeker);
+		
+		String code = mailVerificationService.sendCode();
+		addVerificationCode(jobSeeker, code);
+		
 		return new SuccessResult(Messages.JobSeekerAdd);
 	}
 	
@@ -72,6 +85,24 @@ public class JobSeekerManager implements JobSeekerService {
 		}
 		
 		return new ErrorResult(Messages.MernisError);
+	}
+	
+	private Result isEmailOrIdentityNumberRegistered(JobSeeker jobSeeker) {
+		
+		var result = this.jobSeekerDao.getByEmailOrIdentityNumber(jobSeeker.getEmail(), jobSeeker.getIdentityNumber());
+		
+		if(result != null) {
+			return new ErrorResult(Messages.EmailOrIdentityRegistered);
+		}
+		return new SuccessResult();
+	}
+	
+	private Result addVerificationCode(JobSeeker jobSeeker, String code) {
+		
+		EmailVerification emailVerification = new EmailVerification(jobSeeker.getId(), false, code);
+		this.emailVerificationService.add(emailVerification);
+		System.out.println("Doğrulama kodu gönderildi " + jobSeeker.getEmail());
+		return new SuccessResult();
 	}
 
 }

@@ -14,4 +14,8 @@ public class Messages {
 	public static String EmployerNullField = "Lütfen tüm alanları doldurunuz.";
 	public static String MernisSuccess = "Mernis doğrulama işlemi başarılı";
 	public static String MernisError = "Mernis doğrulama işlemi başarısız";
+	public static String EmailOrIdentityRegistered = "Bu e-posta adresi yada kimlik numarası kullanılmaktadır.";
+	public static String EmailRegistered = "Bu e-posta adresi kullanılmaktadır.";
+	public static String EmailVerified = "Email doğrulandı.";
+	public static String EmailNotVerified = "Email adresi doğrulanmamıştır, kayıt olmak için lütfen adresinizi doğrulayınız.";
 }
