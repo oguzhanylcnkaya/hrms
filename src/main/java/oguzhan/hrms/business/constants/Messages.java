@@ -18,4 +18,9 @@ public class Messages {
 	public static String EmailRegistered = "Bu e-posta adresi kullanılmaktadır.";
 	public static String EmailVerified = "Email doğrulandı.";
 	public static String EmailNotVerified = "Email adresi doğrulanmamıştır, kayıt olmak için lütfen adresinizi doğrulayınız.";
+	public static String JobAdvertisementAdded = "İş ilanı eklendi.";
+	public static String JobAdvertisementPassive = "İş ilanı pasif hale getirildi";
+	public static String JobAdvertisementNotFound = "İş ilanı bulunamadı, lütfen tekrar deneyiniz.";
+	public static String JobAdvertisementUpdated = "İş ilanı güncellendi.";
+	public static String JobAdvertisementGetById = "İş ilanı getirildi.";
 }
