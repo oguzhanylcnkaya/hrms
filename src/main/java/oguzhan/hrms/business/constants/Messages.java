@@ -23,4 +23,15 @@ public class Messages {
 	public static String JobAdvertisementNotFound = "İş ilanı bulunamadı, lütfen tekrar deneyiniz.";
 	public static String JobAdvertisementUpdated = "İş ilanı güncellendi.";
 	public static String JobAdvertisementGetById = "İş ilanı getirildi.";
+	public static String ResumeAdded = "Özgeçmiş oluşturuldu. Lütfen diğer kısımları oluşturunuz.";
+	public static String SchoolAdded = "Okul bilgisi eklendi.";
+	public static String ResumeGetById = "Özgeçmiş getirildi.";
+	public static String TechnologyAdded = "Teknoloji eklendi.";
+	public static String LanguageAdded = "Yabancı Dil eklendi";
+	public static String ExperienceAdded = "İş deneyimi eklendi.";
+	public static String CoverLetterAdded = "Ön yazı eklendi.";
+	public static String SocialMediaAccountAdded = "Sosyal medya hesapları eklendi.";
+	public static String PhotoAdded = "Fotoğraf eklendi.";
+	public static String ResumeGetByJobSeeker = "Tüm CV bilgileriniz listelendi.";
+	public static String PhotoByJobSeeker = "İş arayan kullanıcının fotoğrafları getirildi.";
 }

@@ -16,8 +16,8 @@ import oguzhan.hrms.core.utilities.results.Result;
 import oguzhan.hrms.entities.concretes.JobAdvertisement;
 import oguzhan.hrms.entities.dtos.JobAdvertisementForDto;
 
-@RequestMapping
-@RestController("/api/jobadvertisements")
+@RestController
+@RequestMapping("/api/jobadvertisements")
 public class JobAdvertisementsController {
 	
 	private JobAdvertisementService jobAdvertisementService;

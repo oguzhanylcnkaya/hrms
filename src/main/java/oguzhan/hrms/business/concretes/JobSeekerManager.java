@@ -62,6 +62,11 @@ public class JobSeekerManager implements JobSeekerService {
 		return new SuccessResult(Messages.JobSeekerAdd);
 	}
 	
+	@Override
+	public DataResult<JobSeeker> getById(int id) {
+		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.getById(id));
+	}
+
 	private Result isAllFieldNull(JobSeeker jobSeeker) {
 		
 		if(jobSeeker.getBirthDate() == null || 
@@ -104,5 +109,7 @@ public class JobSeekerManager implements JobSeekerService {
 		System.out.println("Doğrulama kodu gönderildi " + jobSeeker.getEmail());
 		return new SuccessResult();
 	}
+
+	
 
 }

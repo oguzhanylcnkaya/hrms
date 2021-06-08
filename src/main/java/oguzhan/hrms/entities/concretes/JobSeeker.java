@@ -1,9 +1,11 @@
 package oguzhan.hrms.entities.concretes;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -34,5 +36,9 @@ public class JobSeeker extends User {
 	@Column(name = "birthdate", nullable = false)
 	private LocalDate birthDate;
 
+	@OneToMany(mappedBy = "jobSeeker")
+	private List<Resume> resumes;
 	
+	@OneToMany(mappedBy = "jobSeeker")
+	private List<Photo>  photos;
 }
