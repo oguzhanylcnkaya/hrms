@@ -3,6 +3,7 @@ package oguzhan.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import oguzhan.hrms.entities.dtos.JobAdvertisementForDto;
 
 @RestController
 @RequestMapping("/api/jobadvertisements")
+@CrossOrigin
 public class JobAdvertisementsController {
 	
 	private JobAdvertisementService jobAdvertisementService;
@@ -38,37 +40,37 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getAll();
 	}
 	
-	@GetMapping("getAllJobAdvertisementForDto")
+	@GetMapping("/getAllJobAdvertisementForDto")
 	public DataResult<List<JobAdvertisementForDto>> getJobAdvertisementForDto(){
 		return this.jobAdvertisementService.getAllJobAdvertisementForDto();
 	}
 	
-	@GetMapping("getActiveJobAdvertisement")
+	@GetMapping("/getActiveJobAdvertisement")
 	public DataResult<List<JobAdvertisementForDto>> getActiveJobAdvertisement(){
 		return this.jobAdvertisementService.getActiveJobAdvertisement();
 	}
 	
-	@GetMapping("getActiveJobAdvertisementByCreateDate")
+	@GetMapping("/getActiveJobAdvertisementByCreateDate")
 	public DataResult<List<JobAdvertisementForDto>> getActiveJobAdvertisementByCreateDate(){
 		return this.jobAdvertisementService.getActiveJobAdvertisementByCreateDate();
 	}
 	
-	@GetMapping("getActiveJobAdvertisementByCreateDateDesc")
+	@GetMapping("/getActiveJobAdvertisementByCreateDateDesc")
 	public DataResult<List<JobAdvertisementForDto>> getActiveJobAdvertisementByCreateDateDesc(){
 		return this.jobAdvertisementService.getActiveJobAdvertisementByCreateDateDesc();
 	}
 	
-	@GetMapping("getActiveJobAdvertisementByApplicationDeadline")
+	@GetMapping("/getActiveJobAdvertisementByApplicationDeadline")
 	public DataResult<List<JobAdvertisementForDto>> getActiveJobAdvertisementByApplicationDeadline(){
 		return this.jobAdvertisementService.getActiveJobAdvertisementByApplicationDeadline();
 	}
 	
-	@GetMapping("getActiveJobAdvertisementByApplicationDeadlineDesc")
+	@GetMapping("/getActiveJobAdvertisementByApplicationDeadlineDesc")
 	public DataResult<List<JobAdvertisementForDto>> getActiveJobAdvertisementByApplicationDeadlineDesc(){
 		return this.jobAdvertisementService.getActiveJobAdvertisementByApplicationDeadlineDesc();
 	}
 	
-	@GetMapping("getActiveJobAdvertisementByCompanyName")
+	@GetMapping("/getActiveJobAdvertisementByCompanyName")
 	public DataResult<List<JobAdvertisementForDto>> getActiveJobAdvertisementByCompanyName(@RequestParam String companyName){
 		return this.jobAdvertisementService.getActiveJobAdvertisementByCompanyName(companyName);
 	}
@@ -76,5 +78,20 @@ public class JobAdvertisementsController {
 	@PostMapping("/doPassiveTheAdvertisement")
 	public Result doPassiveTheAdvertisement(int id) {
 		return this.jobAdvertisementService.doPassiveTheAdvertisement(id);
+	}
+	
+	@PostMapping("/doActiveTheAdvertisement")
+	public Result doActiveTheAdvertisement(int id) {
+		return this.jobAdvertisementService.doActiveTheAdvertisement(id);
+	}
+
+	@GetMapping("/getNotApproveByHrmsPersonnel")
+	public DataResult<List<JobAdvertisementForDto>> getNotApproveByHrmsPersonnel(){
+		return this.jobAdvertisementService.getNotApproveByHrmsPersonnel();
+	}
+	
+	@PostMapping("/doApproveByHrmsPersonnel")
+	public Result doApproveByHrmsPersonnel(@RequestParam int id) {
+		return this.jobAdvertisementService.doApproveByHrmsPersonnel(id);
 	}
 }

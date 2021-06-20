@@ -43,6 +43,9 @@ public class JobAdvertisement {
 	@Column(name = "is_active")
 	private boolean isActive;
 	
+	@Column(name = "did_hrmspersonnel_approved")
+	private boolean didHrmsPersonnelAproved;
+	
 	@Column(name = "create_date")
 	private LocalDate createDate = LocalDate.now();
 	
@@ -57,5 +60,13 @@ public class JobAdvertisement {
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
+	
+	@ManyToOne
+	@JoinColumn(name = "work_type_id")
+	private WorkType workType;
+	
+	@ManyToOne
+	@JoinColumn(name = "work_hour_id")
+	private WorkHour workHour;
 	
 }

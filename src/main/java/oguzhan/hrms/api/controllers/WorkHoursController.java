@@ -10,31 +10,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import oguzhan.hrms.business.abstracts.JobPositionService;
+import oguzhan.hrms.business.abstracts.WorkHourService;
 import oguzhan.hrms.core.utilities.results.DataResult;
 import oguzhan.hrms.core.utilities.results.Result;
-import oguzhan.hrms.entities.concretes.JobPosition;
+import oguzhan.hrms.entities.concretes.WorkHour;
 
 @RestController
-@RequestMapping("/api/jobpositions")
+@RequestMapping("/api/workhours")
 @CrossOrigin
-public class JobPositionsController {
-	
-	private JobPositionService jobPositionService;
+public class WorkHoursController {
 
+	private WorkHourService workHourService;
+	
 	@Autowired
-	public JobPositionsController(JobPositionService jobPositionService) {
+	public WorkHoursController(WorkHourService workHourService) {
 		super();
-		this.jobPositionService = jobPositionService;
+		this.workHourService = workHourService;
+	}
+
+	@PostMapping("/add")
+	public Result add(@RequestBody String workHour) {
+		return this.workHourService.add(workHour);
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<JobPosition>> getAll(){
-		return this.jobPositionService.getAll();
-	}
-	
-	@PostMapping("/add")
-	public Result add(@RequestBody JobPosition jobPosition) {
-		return this.jobPositionService.add(jobPosition);
+	public DataResult<List<WorkHour>> getAll(){
+		return this.workHourService.getAll();
 	}
 }

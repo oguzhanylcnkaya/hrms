@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JobAdvertisementForDto {
 	
+	private int jobAdvertisementId;
+	
 	private String companyName;
 	
 	private String jobName;

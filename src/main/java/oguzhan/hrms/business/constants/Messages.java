@@ -34,4 +34,10 @@ public class Messages {
 	public static String PhotoAdded = "Fotoğraf eklendi.";
 	public static String ResumeGetByJobSeeker = "Tüm CV bilgileriniz listelendi.";
 	public static String PhotoByJobSeeker = "İş arayan kullanıcının fotoğrafları getirildi.";
+	public static String JobAdvertisementActive = "İş ilanı aktif hale getirildi";
+	public static String WorkTypeAdded = "İş çalışma türü eklendi.";
+	public static String WorkHourAdded = "Çalışma zaman bilgisi eklendi.";
+	public static String WorkHourGetAll = "Çalışma zaman listesi getirildi.";
+	public static String GetNotApproveByHrmsPersonnel = "Sistem personeli tarafından onaylanmayan iş ilanları getirildi.";
+	public static String JobAdvertisementApproveByHrmsPersonnel = "İş ilanı sistem personeli tarafından onaylandı.";
 }

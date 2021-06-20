@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import oguzhan.hrms.entities.concretes.Experience;
 
 @RestController
 @RequestMapping("/api/experiences")
+@CrossOrigin
 public class ExperiencesController {
 
 	private ExperienceService experienceService;

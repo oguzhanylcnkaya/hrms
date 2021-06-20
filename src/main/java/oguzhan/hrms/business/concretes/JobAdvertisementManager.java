@@ -29,6 +29,7 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 
 	@Override
 	public Result add(JobAdvertisement jobAdvertisement) {
+		jobAdvertisement.setDidHrmsPersonnelAproved(false);
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult(Messages.JobAdvertisementAdded);
 	}
@@ -87,6 +88,21 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		return new SuccessResult(Messages.JobAdvertisementPassive);
 		
 	}
+	
+	@Override
+	public Result doActiveTheAdvertisement(int id) {
+		var result = this.jobAdvertisementDao.getById(id);
+		
+		if(result == null) {
+			return new ErrorResult(Messages.JobAdvertisementNotFound);
+		}
+		
+		JobAdvertisement advertisement = getById(id).getData();
+		advertisement.setActive(true);
+		update(advertisement);
+		return new SuccessResult(Messages.JobAdvertisementActive);
+		
+	}
 
 	@Override
 	public DataResult<JobAdvertisement> getById(int id) {
@@ -98,5 +114,25 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult(Messages.JobAdvertisementUpdated);
 	}
+
+	@Override
+	public DataResult<List<JobAdvertisementForDto>> getNotApproveByHrmsPersonnel() {
+		return new SuccessDataResult<List<JobAdvertisementForDto>>(this.jobAdvertisementDao.getNotApproveByHrmsPersonnel(), Messages.GetNotApproveByHrmsPersonnel);
+	}
+
+	@Override
+	public Result doApproveByHrmsPersonnel(int id) {
+		JobAdvertisement result = this.jobAdvertisementDao.getById(id);
+		
+		if(result == null) {
+			return new ErrorResult(Messages.JobAdvertisementNotFound);
+		}
+		
+		result.setDidHrmsPersonnelAproved(true);
+		update(result);
+		return new SuccessResult(Messages.JobAdvertisementApproveByHrmsPersonnel);
+				
+	}
+
 
 }

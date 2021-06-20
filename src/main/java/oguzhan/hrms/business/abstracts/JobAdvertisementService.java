@@ -28,5 +28,11 @@ public interface JobAdvertisementService {
 	
 	Result doPassiveTheAdvertisement(int id);
 	
+	Result doActiveTheAdvertisement(int id);
+	
 	DataResult<JobAdvertisement> getById(int id);
+	
+	DataResult<List<JobAdvertisementForDto>> getNotApproveByHrmsPersonnel();
+	
+	Result doApproveByHrmsPersonnel(int id);
 }
